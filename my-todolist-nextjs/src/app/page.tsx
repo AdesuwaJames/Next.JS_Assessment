@@ -523,10 +523,10 @@ export default function Home() {
                           </CardAction>
                         </CardHeader>
                         <CardContent>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
-                            This is a description for &quot;{card.title}&quot;.
-                          </p>
-                        </CardContent>
+  <p className="text-sm text-gray-600 dark:text-gray-400">
+    {"This is a description for \""}{card.title}{"\""}.
+  </p>
+</CardContent>
                         <CardFooter className="flex justify-between items-center">
                           <p className="text-sm font-medium">
                             {formatDate(new Date(card.date))}
