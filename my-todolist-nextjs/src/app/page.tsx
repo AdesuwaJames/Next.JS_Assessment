@@ -45,6 +45,14 @@ import {
 } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/app/Sidebar/Side-bar";
 
+// Define API response type
+interface ApiTodo {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+}
+
 // Utility functions
 function formatDate(date: Date | undefined) {
   if (!date) return "";
@@ -148,7 +156,7 @@ export default function Home() {
         // If no data in IndexedDB, check localStorage as fallback
         const todosFromStorage = localStorage.getItem("todos");
         if (todosFromStorage) {
-          const data = JSON.parse(todosFromStorage);
+          const data: Todo[] = JSON.parse(todosFromStorage);
           setCards(data);
           // Sync to IndexedDB
           await db.todos.bulkPut(data);
@@ -164,10 +172,12 @@ export default function Home() {
           if (!response.ok) {
             throw new Error('Failed to fetch todos');
           }
-          const data = await response.json();
+          const data: ApiTodo[] = await response.json();
 
-          const enhancedData = data.map((item: any, index: number) => ({
-            ...item,
+          const enhancedData: Todo[] = data.slice(0, 30).map((item: ApiTodo, index: number) => ({
+            id: item.id,
+            title: item.title,
+            completed: item.completed,
             date: new Date(2025, 5, (index % 30) + 1).toISOString(),
             bgClass: getRandomPastelColor(),
             lastUpdated: Date.now(),
@@ -175,7 +185,7 @@ export default function Home() {
           }));
 
           const sortedData = enhancedData.sort(
-            (a: any, b: any) =>
+            (a: Todo, b: Todo) =>
               new Date(b.date).getTime() - new Date(a.date).getTime()
           );
 
