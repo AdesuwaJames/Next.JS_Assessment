@@ -344,8 +344,9 @@ export default function Home() {
             {/* ==== Main Todo Page UI Starts Here ==== */}
             {!isOnline && (
               <div className="mb-4 p-3 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded-lg">
-                ⚠️ You're offline. Changes will sync when you're back online.
-              </div>
+  ⚠️ You&apos;re offline. Changes will sync when you&apos;re back online.
+</div>
+
             )}
 
             {error && (
@@ -522,9 +523,9 @@ export default function Home() {
                             </Button>
                           </CardAction>
                         </CardHeader>
-                        <CardContent>
+                      <CardContent>
   <p className="text-sm text-gray-600 dark:text-gray-400">
-    {"This is a description for \""}{card.title}{"\""}.
+    This is a description for &quot;{card.title}&quot;.
   </p>
 </CardContent>
                         <CardFooter className="flex justify-between items-center">
