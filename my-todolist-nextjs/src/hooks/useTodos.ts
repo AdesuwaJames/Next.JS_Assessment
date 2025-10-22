@@ -1,7 +1,7 @@
 // src/hooks/useTodos.ts
 import { useEffect, useState } from "react";
-import { db } from "../lib/db";
-import type { Todo } from "../lib/db";
+import { db } from "@/lib/db";
+import type { Todo } from "@/lib/db";
 
 export const useTodos = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
