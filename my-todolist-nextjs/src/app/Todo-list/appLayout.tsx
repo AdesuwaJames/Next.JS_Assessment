@@ -15,7 +15,7 @@ export function SidebarLayoutWrapper({
       try {
         const unsyncedTodos = await db.todos
           .where("isSynced")
-          .equals(false as any)
+          .equals(0)
           .toArray();
 
         if (unsyncedTodos.length > 0) {

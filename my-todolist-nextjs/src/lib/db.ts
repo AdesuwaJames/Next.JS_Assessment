@@ -7,7 +7,7 @@ export interface Todo {
   date: string;
   bgClass?: string;
   lastUpdated?: number;
-  isSynced?: boolean;
+  isSynced: boolean;
 }
 
 export interface SyncQueueItem {
@@ -153,7 +153,7 @@ export class TodoDB extends Dexie {
    * Get unsynced todos count
    */
   async getUnsyncedCount(): Promise<number> {
-    return await this.todos.where("isSynced").equals(false as any).count();
+    return await this.todos.where("isSynced").equals(0).count();
   }
 
   /**
@@ -165,6 +165,7 @@ export class TodoDB extends Dexie {
     localStorage.removeItem("todos");
   }
 }
+
 // Auto-sync when the browser comes online
 if (typeof window !== "undefined") {
   window.addEventListener("online", async () => {
@@ -172,6 +173,5 @@ if (typeof window !== "undefined") {
     await db.processSyncQueue();
   });
 }
-
 
 export const db = new TodoDB();
